@@ -1,0 +1,8 @@
+{
+  "network": "GIWA Sepolia",
+  "chainId": 0,
+  "mockKRW": "0x...",
+  "receivableFinance": "0x...",
+  "deployer": "0x...",
+  "deployedAt": "2026-07-29"
+}
