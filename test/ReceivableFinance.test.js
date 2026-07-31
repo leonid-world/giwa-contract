@@ -1,20 +1,5 @@
 const assert = require("node:assert/strict");
-const fs = require("node:fs");
-const path = require("node:path");
 const { ethers } = require("hardhat");
-
-function compiledArtifact(contractName) {
-    const prefix = path.join(
-        __dirname,
-        "..",
-        "build",
-        `contracts_${contractName}_sol_${contractName}`
-    );
-    return {
-        abi: JSON.parse(fs.readFileSync(`${prefix}.abi`, "utf8")),
-        bytecode: `0x${fs.readFileSync(`${prefix}.bin`, "utf8").trim()}`
-    };
-}
 
 function parsedEvent(contract, receipt, eventName) {
     for (const log of receipt.logs) {
@@ -82,20 +67,18 @@ describe("ReceivableFinance", function () {
     beforeEach(async function () {
         [owner, seller, buyer, funder, investor] = await ethers.getSigners();
 
-        const mockArtifact = compiledArtifact("MockKRW");
-        mockKrw = await new ethers.ContractFactory(
-            mockArtifact.abi,
-            mockArtifact.bytecode,
+        const mockKrwFactory = await ethers.getContractFactory(
+            "MockKRW",
             owner
-        ).deploy();
+        );
+        mockKrw = await mockKrwFactory.deploy();
         await mockKrw.waitForDeployment();
 
-        const financeArtifact = compiledArtifact("ReceivableFinance");
-        finance = await new ethers.ContractFactory(
-            financeArtifact.abi,
-            financeArtifact.bytecode,
+        const financeFactory = await ethers.getContractFactory(
+            "ReceivableFinance",
             owner
-        ).deploy(await mockKrw.getAddress());
+        );
+        finance = await financeFactory.deploy(await mockKrw.getAddress());
         await finance.waitForDeployment();
     });
 

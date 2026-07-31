@@ -1,8 +1,25 @@
 {
   "network": "GIWA Sepolia",
-  "chainId": null,
-  "mockKRW": null,
-  "receivableFinance": null,
-  "deployer": null,
-  "deployedAt": null
+  "chainId": 91342,
+  "mockKRW": "0x5cD8a99Dcf5Fa00fb4fD9873b41A15F9C13C9d3F",
+  "receivableFinance": "0x0f264334f98BA0d22f7Fc6Bb901a5Fa36158a315",
+  "deployer": "0x96888063CDFb3849cC28EB1474532Afb749b11E8",
+  "deployedAt": "2026-07-31T05:23:26.127Z",
+  "compiler": {
+    "version": "0.8.24+commit.e11b9ed9",
+    "optimizer": {
+      "enabled": true,
+      "runs": 200
+    },
+    "viaIR": false,
+    "evmVersion": "paris"
+  },
+  "transactions": {
+    "mockKRW": "0xc0b1b13a34d7d7ffbf6eddc952d10bb6f09cecce63c5ce09a729d31cd6e42cd5",
+    "receivableFinance": "0x2395d32caeee81a1e171f04b4405e96c79f4bc9720d0e8be10ef695d9295e58e"
+  },
+  "blocks": {
+    "mockKRW": 32130291,
+    "receivableFinance": 32130292
+  }
 }

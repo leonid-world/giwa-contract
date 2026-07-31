@@ -1,2 +1,8 @@
 build/
+artifacts/
+cache/
 node_modules/
+.env
+.env.*
+!.env.example
+deployment/*.tmp

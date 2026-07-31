@@ -3,14 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "compile": "solcjs --base-path . --include-path node_modules --abi --bin contracts/MockKRW.sol contracts/ReceivableFinance.sol --output-dir build",
-    "test": "npm run compile && hardhat test --no-compile"
+    "clean": "hardhat clean",
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "deploy:giwa": "hardhat run scripts/deploy.js --network giwaSepolia",
+    "verify:giwa": "hardhat run scripts/verify.js --network giwaSepolia",
+    "deploy:giwa:verify": "npm run deploy:giwa && npm run verify:giwa",
+    "deployment:env": "node scripts/print-env.js"
   },
   "dependencies": {
     "@openzeppelin/contracts": "5.4.0"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-ethers": "3.1.0",
+    "@nomicfoundation/hardhat-verify": "2.1.3",
     "ethers": "6.17.0",
     "hardhat": "2.29.0",
     "solc": "0.8.24"
