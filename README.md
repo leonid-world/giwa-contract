@@ -51,8 +51,9 @@ The public RPC is rate-limited. Override it for the current terminal when needed
 export GIWA_RPC_URL=https://your-giwa-rpc.example
 ```
 
-Hardhat needs a signer only for deployment. Do not put a private key in a project
-file or command-line argument. Export it temporarily in the current terminal:
+Hardhat needs the owner signer for deployment and explicit MockKRW administration
+only. Do not put a private key in a project file or command-line argument. Export
+it temporarily in the current terminal:
 
 ```bash
 read -s "DEPLOYER_PRIVATE_KEY?GIWA deployer private key: "
@@ -111,6 +112,49 @@ Update both address pairs together:
 
 Vercel must be rebuilt, and the backend must be restarted/redeployed.
 
+## MockKRW demo-wallet distribution
+
+한국어 전체 사용법과 오류 대응은
+[`MKRW_OPERATIONS.md`](./MKRW_OPERATIONS.md)를 참고한다.
+
+The MockKRW constructor issues the initial `1,000,000,000 mKRW` supply to the
+deployer/owner. Prefer transferring that existing test balance to a Funder or
+Buyer. Use additional minting only when the MVP needs more test-token supply.
+
+Export the current onchain MockKRW owner key only for the terminal session:
+
+```bash
+read -s "DEPLOYER_PRIVATE_KEY?GIWA MockKRW owner private key: "
+export DEPLOYER_PRIVATE_KEY
+```
+
+Transfer existing owner balance without increasing total supply:
+
+```bash
+npm run mkrw:transfer -- 0xRECIPIENT_WALLET 8000000
+```
+
+Or issue additional test-only supply directly to a demo wallet:
+
+```bash
+npm run mkrw:mint -- 0xRECIPIENT_WALLET 8000000
+```
+
+Then remove the key from the shell:
+
+```bash
+unset DEPLOYER_PRIVATE_KEY
+```
+
+Amounts are positive integer mKRW values without commas or decimal points because
+the token uses zero decimals. Both tasks read the MockKRW address from
+`deployment/giwa-testnet.json`, require GIWA Sepolia chain ID `91342`, verify the
+live contract, current onchain owner, owner gas balance, and resulting Transfer
+event, and print the transaction explorer URL. They attach to the existing
+deployment and do not deploy a new contract. Never automatically rerun a command
+after a submitted hash; check its explorer status first. Post-transaction state
+reads target the confirmed block and retry temporary public-RPC visibility lag.
+
 ## New deployment data boundary
 
 A new ReceivableFinance contract has empty receivable/NFT storage, and a new
@@ -120,7 +164,8 @@ the old addresses but cannot continue on the new pair.
 
 - Never update old receivable rows to the new address.
 - Create a new demo receivable and run the lifecycle from CREATED.
-- Mint the new MockKRW to Buyer and Funder wallets.
+- Transfer the new deployer's initial MockKRW balance to Buyer and Funder wallets,
+  or mint additional test supply only when necessary.
 - Import the new MockKRW address in MetaMask.
 - Approve the new ReceivableFinance address again.
 - Prefer a new empty demo database while preserving the completed database.

@@ -9,7 +9,9 @@
     "deploy:giwa": "hardhat run scripts/deploy.js --network giwaSepolia",
     "verify:giwa": "hardhat run scripts/verify.js --network giwaSepolia",
     "deploy:giwa:verify": "npm run deploy:giwa && npm run verify:giwa",
-    "deployment:env": "node scripts/print-env.js"
+    "deployment:env": "node scripts/print-env.js",
+    "mkrw:transfer": "hardhat --network giwaSepolia mkrw-transfer",
+    "mkrw:mint": "hardhat --network giwaSepolia mkrw-mint"
   },
   "dependencies": {
     "@openzeppelin/contracts": "5.4.0"

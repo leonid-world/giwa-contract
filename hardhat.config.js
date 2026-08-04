@@ -1,5 +1,6 @@
 require("@nomicfoundation/hardhat-ethers");
 require("@nomicfoundation/hardhat-verify");
+require("./tasks/mkrw");
 
 const { subtask } = require("hardhat/config");
 const {
