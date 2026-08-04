@@ -127,13 +127,44 @@ Explorer에서 기존 해시를 확인해야 한다.
 이 작업은 이미 해당 지갑 주소에 기록된 온체인 잔액을 MetaMask 화면에 표시할
 뿐이며 토큰을 새로 전송하지 않는다.
 
+### 8.1 GIWA Sepolia 커스텀 네트워크 추가
+
+MetaMask에 GIWA Sepolia가 없다면 `네트워크 추가`에서 `네트워크 직접 추가`
+또는 `Add a network manually`를 선택하고 다음 값을 입력한다.
+
+```text
+네트워크 이름
+GIWA Sepolia
+
+기본 RPC URL
+https://sepolia-rpc.giwa.io
+
+체인 ID
+91342
+
+통화 기호
+ETH
+
+블록 탐색기 URL
+https://sepolia-explorer.giwa.io
+```
+
+Chain ID의 16진수 표기는 `0x164ce`지만 MetaMask 직접 입력 화면에는 일반적으로
+십진수 `91342`를 사용한다. 네트워크 등록 정보는 MetaMask의 여러 계정에서
+공유되지만, ETH와 mKRW 잔액은 각 계정 주소별로 별도 기록된다.
+
+### 8.2 실제 수취 계정 선택
+
 1. MetaMask 네트워크를 `GIWA Sepolia`로 선택한다.
 2. Chain ID가 `91342`인지 확인한다.
 3. 현재 활성 계정을 mKRW를 받은 Funder 또는 Buyer 계정으로 전환한다.
 4. 계정 주소가 Hardhat 명령의 `Recipient` 출력과 같은지 확인한다.
-5. MetaMask의 `토큰` 탭을 연다.
-6. 우측 점 3개 또는 화면 하단에서 `토큰 가져오기`를 선택한다.
-7. `맞춤 토큰` 또는 `Custom token` 입력 화면을 연다.
+
+### 8.3 현재 MockKRW 토큰 가져오기
+
+1. MetaMask의 `토큰` 탭을 연다.
+2. 우측 점 3개 또는 화면 하단에서 `토큰 가져오기`를 선택한다.
+3. `맞춤 토큰` 또는 `Custom token` 입력 화면을 연다.
 
 현재 배포의 토큰 정보는 다음과 같다.
 
@@ -158,6 +189,8 @@ mKRW
 이전 Remix 또는 이전 Hardhat 배포의 mKRW가 이미 등록돼 있으면 같은 `mKRW`
 기호가 여러 개 표시될 수 있다. 각 항목의 토큰 컨트랙트 주소를 확인하고 현재
 배포 주소의 mKRW를 선택해야 한다. 서로 다른 배포의 잔액은 합쳐지지 않는다.
+
+### 8.4 잔액 새로고침과 Explorer 확인
 
 현재 배포 주소가 이미 등록돼 있지만 잔액이 갱신되지 않으면 다음 순서로
 확인한다.
