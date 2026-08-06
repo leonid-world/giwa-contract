@@ -1,0 +1,25 @@
+{
+  "network": "GIWA Sepolia",
+  "chainId": 91342,
+  "mockKRWFaucet": "0xa451FA95c3E2Efd771f6Ba556daBBf36f888ef2E",
+  "mockKRW": "0x5cD8a99Dcf5Fa00fb4fD9873b41A15F9C13C9d3F",
+  "receivableFinance": "0x0f264334f98BA0d22f7Fc6Bb901a5Fa36158a315",
+  "claimAmount": "10000000",
+  "deployer": "0x96888063CDFb3849cC28EB1474532Afb749b11E8",
+  "deployedAt": "2026-08-06T10:42:44.992Z",
+  "compiler": {
+    "version": "0.8.24+commit.e11b9ed9",
+    "optimizer": {
+      "enabled": true,
+      "runs": 200
+    },
+    "viaIR": false,
+    "evmVersion": "paris"
+  },
+  "transactions": {
+    "mockKRWFaucet": "0xcd71ff3c79c17bfc4627a22c87a72139c30cd5a69cf686025744f5b30f8cc633"
+  },
+  "blocks": {
+    "mockKRWFaucet": 32667847
+  }
+}

@@ -205,7 +205,32 @@ mKRW
 `0x3dc823dc2C1caf3c14B5B882c7e9A80CC40DF9b7`은 첫 `10,000 mKRW`와 추가
 `100,000 mKRW` 전송 후 온체인 잔액이 `110,000 mKRW`다.
 
-## 9. 작업 후 개인키 제거
+## 9. 온라인 데모 Faucet 재고 충전
+
+Funding 화면의 `데모 mKRW 충전`은 새 토큰을 발행하지 않는다. Owner가 기존
+mKRW를 MockKRWFaucet에 먼저 전송해 둔 뒤, 각 Funder 지갑이 그 재고에서
+`10,000,000 mKRW`를 한 번 수령한다.
+
+현재 Faucet 주소는 다음 배포 기록에서 확인한다.
+
+```text
+deployment/giwa-testnet-faucet.json
+MockKRWFaucet: 0xa451FA95c3E2Efd771f6Ba556daBBf36f888ef2E
+```
+
+2026-08-06 RPC 확인 기준 Faucet 재고는 `0 mKRW`이므로 공개 데모 전에 다음
+Owner 전송을 한 번 실행해야 한다.
+
+```bash
+npm run mkrw:transfer -- 0xa451FA95c3E2Efd771f6Ba556daBBf36f888ef2E 200000000
+```
+
+이 예시는 `10,000,000 mKRW` 충전 20회를 제공하며 총발행량은 늘리지 않는다.
+전송 후 출력된 해시를 Explorer에서 확인하고, 같은 명령을 중복 실행하지 않는다.
+Faucet 잔액이 부족해졌을 때는 필요한 재고량을 계산해 동일한 `transfer` 방식으로
+추가한다. `mint`가 아니라 기존 Owner 물량 이전을 우선한다.
+
+## 10. 작업 후 개인키 제거
 
 성공 여부와 관계없이 작업을 마치면 현재 터미널 변수에서 개인키를 제거한다.
 
@@ -219,7 +244,7 @@ unset DEPLOYER_PRIVATE_KEY
 if [[ -z "$DEPLOYER_PRIVATE_KEY" ]]; then echo "Owner key cleared"; fi
 ```
 
-## 10. 자주 발생하는 오류
+## 11. 자주 발생하는 오류
 
 ### `DEPLOYER_PRIVATE_KEY is missing`
 
@@ -259,7 +284,7 @@ GIWA RPC, Chain ID 또는 `deployment/giwa-testnet.json`의 배포 주소가 서
 수취 주소는 42자리 `0x` EVM 주소여야 한다. 금액은 `1` 이상의 정수이며 쉼표와
 소수점을 사용할 수 없다.
 
-## 11. 보안 원칙
+## 12. 보안 원칙
 
 - Owner 개인키나 시드 문구를 누구에게도 전달하지 않는다.
 - 개인키를 Git, `.env`, 애플리케이션 설정 또는 백엔드에 저장하지 않는다.
